@@ -58,3 +58,72 @@ api.py
 main.py
 
 requirements.txt
+
+Setup Instructions
+Before running the project, you need to set up your environment and install the required dependencies.
+
+1. Create a Project Directory
+Create a new folder for your project and navigate into it.
+
+Bash
+
+mkdir job_scheduler
+cd job_scheduler
+2. Create the Files
+Inside this directory, create the 8 files listed below (requirements.txt, models.py, job_store.py, etc.) and copy the corresponding code into each one.
+
+3. Set Up a Virtual Environment
+It's best practice to use a virtual environment to manage project dependencies.
+
+Bash
+
+# Create a virtual environment named 'venv'
+python -m venv venv
+
+# Activate the virtual environment
+# On Windows:
+# venv\Scripts\activate
+# On macOS/Linux:
+# source venv/bin/activate
+4. Install Dependencies
+Install the necessary Python libraries using the requirements.txt file.
+
+Bash
+
+pip install -r requirements.txt
+5. Run the Application
+Once the dependencies are installed, you can start the job scheduler system.
+
+Bash
+
+python main.py
+You will see output in your terminal as the system starts, seeds initial jobs, and the scheduler and workers begin their tasks. The API server will be available at http://127.0.0.1:5000.
+
+6. Interact with the API
+You can use a tool like curl or Postman to interact with the running application.
+
+List all jobs:
+
+Bash
+
+curl http://127.0.0.1:5000/jobs
+Add a new job:
+
+Bash
+
+curl -X POST -H "Content-Type: application/json" -d '{
+    "name": "Hourly Data Backup",
+    "schedule": "0 * * * *",
+    "command": "run_script",
+    "priority": "LOW"
+}' http://127.0.0.1:5000/jobs
+Get status of a specific job (find a <job_id> from the list command):
+
+Bash
+
+curl http://127.0.0.1:5000/jobs/<job_id>/status
+Delete a job:
+
+Bash
+
+curl -X DELETE http://127.0.0.1:5000/jobs/<job_id>
